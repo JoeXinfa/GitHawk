@@ -48,5 +48,6 @@ enum Constants {
         static let bookmark = NSLocalizedString("Bookmark", comment: "")
         static let removeBookmark = NSLocalizedString("Remove Bookmark", comment: "")
         static let bookmarks = NSLocalizedString("Bookmarks", comment: "")
+        static let checkmark = "\u{2705}"
     }
 }
