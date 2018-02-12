@@ -13,12 +13,17 @@ extension GithubClient {
     func fetchAssignees(
         owner: String,
         repo: String,
-        completion: @escaping (Result<[User]>) -> Void
+        page: Int,
+        completion: @escaping (Result<([User], Int?)>) -> Void
         ) {
         // https://developer.github.com/v3/issues/assignees/#list-assignees
         request(GithubClient.Request(
-            path: "repos/\(owner)/\(repo)/assignees"
-        ) { (response, _) in
+            path: "repos/\(owner)/\(repo)/assignees",
+            parameters: [
+                "per_page": 50,
+                "page": page
+            ]
+        ) { (response, nextPage) in
             if let jsonArr = response.value as? [[String: Any]] {
                 var users = [User]()
                 for json in jsonArr {
@@ -26,8 +31,8 @@ extension GithubClient {
                         users.append(user)
                     }
                 }
-                users.sort { $0.login.lowercased() < $1.login.lowercased() }
-                completion(.success(users))
+                users.sort { $0.login.caseInsensitiveCompare($1.login) == .orderedAscending }
+                completion(.success((users, nextPage?.next)))
             } else {
                 completion(.error(response.error))
             }
