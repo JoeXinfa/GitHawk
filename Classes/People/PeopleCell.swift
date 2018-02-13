@@ -50,6 +50,10 @@ final class PeopleCell: UICollectionViewCell {
     func configure(avatarURL: URL, username: String, showCheckmark: Bool) {
         avatarImageView.sd_setImage(with: avatarURL)
         usernameLabel.text = username
-        checkmarkLabel.text = showCheckmark ? Constants.Strings.checkmark : ""
+        setCellState(selected: showCheckmark)
+    }
+
+    func setCellState(selected: Bool) {
+        checkmarkLabel.text = selected ? Constants.Strings.checkmark : ""
     }
 }

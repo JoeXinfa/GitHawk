@@ -19,7 +19,7 @@ protocol PeopleViewControllerDelegate: class {
 
 final class PeopleViewController: BaseListViewController<NSNumber>,
 BaseListViewControllerDataSource,
-ListSingleSectionControllerDelegate {
+PeopleSectionControllerDelegate {
 
     enum PeopleType {
         case assignee
@@ -106,7 +106,6 @@ ListSingleSectionControllerDelegate {
 
     @IBAction func onDone(_ sender: Any) {
         let selections = users.filter { self.selections.contains($0.login) }
-        for selection in selections { print(selection.login) }
         delegate?.didDismiss(controller: self, type: type, selections: selections)
         dismiss(animated: trueUnlessReduceMotionEnabled)
     }
@@ -126,22 +125,9 @@ ListSingleSectionControllerDelegate {
     }
 
     func sectionController(model: Any, listAdapter: ListAdapter) -> ListSectionController {
-        let configure: (Any, UICollectionViewCell) -> Void = { (user, cell) in
-            guard let user = user as? IssueAssigneeViewModel, let cell = cell as? PeopleCell else { return }
-            let showCheckmark = self.selections.contains(user.login)
-            cell.configure(avatarURL: user.avatarURL, username: user.login, showCheckmark: showCheckmark)
-        }
-        let size: (Any, ListCollectionContext?) -> CGSize = { (file, context) in
-            guard let width = context?.insetContainerSize.width else { fatalError("Missing context") }
-            return CGSize(width: width, height: Styles.Sizes.tableCellHeightLarge)
-        }
-        let controller = ListSingleSectionController(
-            cellClass: PeopleCell.self,
-            configureBlock: configure,
-            sizeBlock: size
-        )
-        controller.selectionDelegate = self
-        return controller
+        guard let user = model as? IssueAssigneeViewModel else { fatalError("Incorrect model type") }
+        let isSelected = selections.contains(user.login)
+        return PeopleSectionController(isSelected: isSelected, delegate: self)
     }
 
     func emptySectionController(listAdapter: ListAdapter) -> ListSectionController {
@@ -159,16 +145,16 @@ ListSingleSectionControllerDelegate {
         })
     }
 
-    // MARK: ListSingleSectionControllerDelegate
+    // MARK: PeopleSectionControllerDelegate
 
-    func didSelect(_ sectionController: ListSingleSectionController, with object: Any) {
-        guard let user = object as? IssueAssigneeViewModel else { return }
-        let isSelected = selections.contains(user.login)
-        if !isSelected && selections.count < selectionLimit {
-            selections.insert(user.login)
-        } else {
-            selections.remove(user.login)
+    func didSelectUser(login: String) {
+        let isSelected = selections.contains(login)
+        if isSelected {
+            selections.remove(login)
+            updateSelectionCount()
+        } else if !isSelected && selections.count < selectionLimit {
+            selections.insert(login)
+            updateSelectionCount()
         }
-        updateSelectionCount()
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C8DF521DAF0A2F50040C658 /* Pods_Freetime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8931D2C1453A85B9D66282C /* Pods_Freetime.framework */; };
+		1F7A83702032E13D00BDCE84 /* PeopleSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A836F2032E13D00BDCE84 /* PeopleSectionController.swift */; };
 		2905AFAB1F7357B40015AE32 /* RepositoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905AFAA1F7357B40015AE32 /* RepositoryOverviewViewController.swift */; };
 		2905AFAD1F7357C50015AE32 /* RepositoryIssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905AFAC1F7357C50015AE32 /* RepositoryIssuesViewController.swift */; };
 		2905AFAF1F7357FA0015AE32 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905AFAE1F7357FA0015AE32 /* RepositoryViewController.swift */; };
@@ -437,6 +438,7 @@
 
 /* Begin PBXFileReference section */
 		19D4DDECEA376B9AA438BCCC /* Pods-FreetimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreetimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FreetimeTests/Pods-FreetimeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F7A836F2032E13D00BDCE84 /* PeopleSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSectionController.swift; sourceTree = "<group>"; };
 		2905AFAA1F7357B40015AE32 /* RepositoryOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryOverviewViewController.swift; sourceTree = "<group>"; };
 		2905AFAC1F7357C50015AE32 /* RepositoryIssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryIssuesViewController.swift; sourceTree = "<group>"; };
 		2905AFAE1F7357FA0015AE32 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 				295B51451FC26DA900C3993B /* GithubClient+People.swift */,
 				295B51411FC26B8100C3993B /* PeopleCell.swift */,
 				295B51431FC26C5400C3993B /* PeopleViewController.swift */,
+				1F7A836F2032E13D00BDCE84 /* PeopleSectionController.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -2349,6 +2352,7 @@
 				292FCB071EDFCC510026635E /* IssueCommentReactionCell.swift in Sources */,
 				292FA33D1FBCE0F000BBB0BB /* Milestone.swift in Sources */,
 				292FCB1F1EDFCD750026635E /* IssueCommentReactionViewModel.swift in Sources */,
+				1F7A83702032E13D00BDCE84 /* PeopleSectionController.swift in Sources */,
 				DC3238911F9B9E1A007DD924 /* SearchRecentViewModel.swift in Sources */,
 				292FCAFF1EDFCC510026635E /* IssueCommentSectionController.swift in Sources */,
 				292FCB081EDFCC510026635E /* IssueCommentSummaryCell.swift in Sources */,
