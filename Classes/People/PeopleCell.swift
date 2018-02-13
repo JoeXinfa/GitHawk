@@ -12,15 +12,15 @@ import SnapKit
 
 final class PeopleCell: UICollectionViewCell {
 
-    var avatarImageView = UIImageView()
-    var usernameLabel = UILabel()
-    var checkmarkLabel = UILabel()
+    let avatarImageView = UIImageView()
+    let usernameLabel = UILabel()
+    let checkmarkImageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(usernameLabel)
-        contentView.addSubview(checkmarkLabel)
+        contentView.addSubview(checkmarkImageView)
 
         avatarImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self.contentView)
@@ -33,9 +33,13 @@ final class PeopleCell: UICollectionViewCell {
             make.left.equalTo(avatarImageView.snp.right).offset(Styles.Sizes.gutter)
         }
 
-        checkmarkLabel.snp.makeConstraints { make in
+        checkmarkImageView.image = UIImage(named: "check")
+        checkmarkImageView.contentMode = .scaleAspectFit
+
+        checkmarkImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self.contentView)
             make.right.equalTo(-Styles.Sizes.gutter)
+            make.size.equalTo(Styles.Sizes.icon)
         }
 
         avatarImageView.configureForAvatar()
@@ -54,6 +58,6 @@ final class PeopleCell: UICollectionViewCell {
     }
 
     func setCellState(selected: Bool) {
-        checkmarkLabel.text = selected ? Constants.Strings.checkmark : ""
+        checkmarkImageView.isHidden = !selected
     }
 }
