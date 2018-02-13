@@ -147,14 +147,17 @@ PeopleSectionControllerDelegate {
 
     // MARK: PeopleSectionControllerDelegate
 
-    func didSelectUser(login: String) {
+    func shouldUpdateCellForUser(login: String) -> Bool {
         let isSelected = selections.contains(login)
         if isSelected {
             selections.remove(login)
             updateSelectionCount()
+            return true
         } else if !isSelected && selections.count < selectionLimit {
             selections.insert(login)
             updateSelectionCount()
+            return true
         }
+        return false
     }
 }

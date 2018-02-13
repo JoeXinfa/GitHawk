@@ -9,7 +9,7 @@
 import IGListKit
 
 protocol PeopleSectionControllerDelegate: class {
-    func didSelectUser(login: String)
+    func shouldUpdateCellForUser(login: String) -> Bool
 }
 
 final class PeopleSectionController: ListGenericSectionController<IssueAssigneeViewModel> {
@@ -36,12 +36,14 @@ final class PeopleSectionController: ListGenericSectionController<IssueAssigneeV
         return cell
     }
 
+
+
     override func didSelectItem(at index: Int) {
         guard let object = self.object else { fatalError("Missing object") }
         guard let cell = collectionContext?.cellForItem(at: index, sectionController: self) as? PeopleCell else {
             fatalError("Cell is not a PeopleCell")
         }
-        delegate?.didSelectUser(login: object.login)
+        guard let shouldUpdate = delegate?.shouldUpdateCellForUser(login: object.login), shouldUpdate else { return }
         isSelected = !isSelected
         cell.setCellState(selected: isSelected)
     }
