@@ -15,9 +15,13 @@ extension String {
         guard split.count > 2,
             let identifier = split.last
             else { return nil }
-        if split[split.count - 2] == "commits" {
+        let type = split[split.count - 2]
+        switch type {
+        case "commits":
             return .hash(identifier)
-        } else {
+        case "releases":
+            return .release(identifier)
+        default:
             return .number((identifier as NSString).integerValue)
         }
     }

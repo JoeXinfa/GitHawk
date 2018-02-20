@@ -63,6 +63,7 @@ SwipeCollectionViewCellDelegate {
             )
             let navigation = UINavigationController(rootViewController: controller)
             viewController?.showDetailViewController(navigation, sender: nil)
+        case .release: break // TODO
         }
     }
 
